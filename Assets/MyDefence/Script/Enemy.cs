@@ -1,5 +1,5 @@
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
+
 
 namespace MyDefence
 {
@@ -12,8 +12,13 @@ namespace MyDefence
     {
         #region Variable
         public float speed = 3f;
-        public Transform target;
+        private Transform target;
         #endregion
+
+        private void Start()
+        {
+             target = WayPoints.points[0];
+        }
 
         // Update is called once per frame
         void Update()
@@ -37,9 +42,11 @@ namespace MyDefence
         {
             if (other.CompareTag("End"))
             {
+                Debug.Log("도착지 충돌!");
                 Destroy(gameObject);
             }
         }
+
 
     }
 }
