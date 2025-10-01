@@ -506,13 +506,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.70710677, y: -0, z: -0, w: 0.7071069}
-  m_LocalPosition: {x: -2, y: 45, z: -6.000002}
+  m_LocalRotation: {x: 0.3944145, y: -0, z: -0, w: 0.9189327}
+  m_LocalPosition: {x: -2, y: 5.2, z: -6.000002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 46.459, y: 0, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1657,6 +1657,9 @@ MonoBehaviour:
   partToRotate: {fileID: 810443050}
   rotateSpeed: 5
   searchTimer: 0.2
+  fireTimer: 1
+  bulletPrefab: {fileID: 6596918482040256818, guid: 1113a0427627e1b44bd79add68a9287d, type: 3}
+  firePoint: {fileID: 1765135295}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

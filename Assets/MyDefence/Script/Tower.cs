@@ -23,6 +23,16 @@ namespace MyDefence
         //찾기 타이머
         public float searchTimer = 0.2f;
         private float countdown = 0;
+
+        //발사 타이머
+        public float fireTimer = 1f;
+        private float fireCountdown = 0f;
+
+        //총알 프리팹 오브젝트
+        public GameObject bulletPrefab;
+
+        //firePoint
+        public Transform firePoint;
         #endregion
 
         #region Event Method
@@ -52,7 +62,7 @@ namespace MyDefence
             if (countdown <= 0f)
             {
                 //타이머 기능 - 가장 가까운 적 찾기
-                UpdateTarget();
+                LockOnTarget();
                 //타이머 초기화
                 countdown = searchTimer; //생성한 변수 두가지
             }
@@ -73,12 +83,35 @@ namespace MyDefence
 
             // Y축으로만 회전하기
             partToRotate.rotation = Quaternion.Euler(0f, eulerValue.y, 0f);
+
+            if (fireCountdown <= 0f)
+            {
+                Shoot();
+                fireCountdown = fireTimer; // 발사 쿨다운 초기화
+            }
+
+            fireCountdown -= Time.deltaTime;
         }
+
+        //발사
+        void Shoot()
+        {
+            Debug.Log("발사!");
+            //총구 위치에 탄환 객체 생성
+            GameObject bulletGo = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            Bullet bullet = bulletGo.GetComponent<Bullet>();
+            bullet.SetTarget(target.transform);
+            if (bullet != null)
+            {
+                bullet.SetTarget(target.transform);
+            }
+        }
+
         #endregion
 
         #region Custom Method
         //타워에서 가장 가까운 적 찾기
-        void UpdateTarget()
+/*        void UpdateTarget()
         {
             //맵 위에 있는 모든 enemy 게임 오브젝트 가져오기
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -109,7 +142,51 @@ namespace MyDefence
             { 
                 target = null;
             }
+        }*/
+
+        void LockOnTarget()
+        {
+            // 현재 타겟이 유효하면 유지
+            if (IsValidTarget(target)) return;
+
+            // 새 타겟 찾기
+            target = FindNearestTargetInRange();
+        }
+
+        /// <summary>
+        /// 현재 타겟이 null이 아니고, 활성 상태이며, 사정거리 내에 있는지 검사
+        /// </summary>
+        bool IsValidTarget(GameObject t)
+        {
+            if (t == null) return false;
+            if (!t.activeInHierarchy) return false;
+
+            float distance = Vector3.Distance(transform.position, t.transform.position);
+            return distance <= attackRange;
+        }
+
+        /// <summary>
+        /// 가장 가까운 적을 찾아 반환 (사정거리 내)
+        /// </summary>
+        GameObject FindNearestTargetInRange()
+        {
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            GameObject nearest = null;
+            float shortest = float.MaxValue;
+
+            foreach (GameObject enemy in enemies)
+            {
+                float distance = Vector3.Distance(transform.position, enemy.transform.position);
+                if (distance < shortest && distance <= attackRange)
+                {
+                    shortest = distance;
+                    nearest = enemy;
+                }
+            }
+
+            return nearest;
         }
         #endregion
+
     }
 }
