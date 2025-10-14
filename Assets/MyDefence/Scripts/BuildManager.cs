@@ -35,7 +35,9 @@ namespace MyDefence
         //여러개의 타워 프리팹중 선택된 프리팹을 저장하는 변수
         private GameObject turretToBuild;
 
-        public GameObject machineGunPrefab;
+        public GameObject machineGunPrefab; //타워 1 프리팹
+
+        public GameObject rocketTowerPrefab; //타워 2 프리팹
         #endregion
 
         #region Unity Event Method
