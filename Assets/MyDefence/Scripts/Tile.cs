@@ -29,7 +29,12 @@ namespace MyDefence
         //타일의 원래 메터리얼
         private Material startMaterial;
 
+        //건설 비용 부족 메터리얼
+        public Material moneyMaterial;
 
+        //타워 건설 효과
+        public GameObject buildEffectPrefab;
+        
         #endregion
 
         #region Unity Event Method
@@ -86,8 +91,18 @@ namespace MyDefence
                 return;
             }
 
-            //renderer.material.color = hoverColor;
-            renderer.material = hoverMaterial;
+            //건설비용 체크
+            if (BuildManager.Instance.HasBuildCost)
+            {
+                renderer.material = hoverMaterial;
+            }
+            else
+            { 
+                renderer.material = moneyMaterial;
+            }
+
+                //renderer.material.color = hoverColor;
+                //renderer.material = hoverMaterial;
         }
 
         private void OnMouseExit()
@@ -111,7 +126,13 @@ namespace MyDefence
             //건설 비용 지불
             PlayerStats.UseMoney(blueprint.cost);
 
+
+            //타워 건설
             tower = Instantiate(blueprint.prefab, this.transform.position + blueprint.offsetPos, Quaternion.identity);
+
+            //파티클 생성, 생성하자마자 kill 예약
+            GameObject effectGo = Instantiate(buildEffectPrefab, this.transform.position, Quaternion.identity);
+            Destroy(effectGo, 2f);
 
             //turretToBuild를 null로 만든다 - 건설 후 재건설 불가능하게 null로 비워준다
             // = OnMouseDown의 turret != null 구문에서 걸린다

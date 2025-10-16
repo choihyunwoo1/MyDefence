@@ -43,11 +43,12 @@ namespace MyDefence
             get { return towerToBuild == null; }
         }
 
-        //건설 비용이 부족
+        //건설 비용 부족 체크
         public bool HasBuildCost
         {
             get 
             {
+                //선택되지 않았으면
                 if (towerToBuild == null)
                     return false;
 

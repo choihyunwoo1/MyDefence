@@ -45,7 +45,11 @@ namespace MyDefence
         #region Custom Method
         private void Arrive()
         {
+            //Enemy Kill
             Destroy(this.gameObject);
+
+            //LifeCount 감소
+            PlayerStats.UseLives();
         }
         #endregion
     }
