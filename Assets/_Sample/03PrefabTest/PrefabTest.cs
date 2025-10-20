@@ -5,186 +5,151 @@ namespace Sample
 {
     public class PrefabTest : MonoBehaviour
     {
-        #region Variables(변수 선언)
+        #region Variables
         //프리팹 오브젝트
-        //public GameObject prefab;
+        public GameObject prefab;
 
-        public GameObject prefab;  // 찍어낼 프리팹
+        //맵 타입들의 부모 오브젝트
         //public Transform parent;
-        public int rows = 10;      // 행 개수
-        public int cols = 10;      // 열 개수
-        public float spacing = 2f; // 간격
+
+        //맵 타일 생성 체크
+        bool isCreate = false;
         #endregion
 
         #region Unity Event Method
-        public void Start()
+        private void Start()
         {
-           StartCoroutine(CreateMapTile());
-           Debug.Log("타일 생성 완료"); //두번째로 출력됨
-
-            //[1] 
-            //Instantiate(prefab); - 하이라키 창에 생성
-            //위치: (5, 0, 8)맵타일 생성하기 - 특정 위치에 생성
+            //[1]
+            //Instantiate(prefab);
+            //위치:(5f, 0f, 8f) 맵타일 생성하기
             //Instantiate(prefab, 위치, 방향);
-            //'Vector3 position = new Vector3 (5f, 0f, 8f); //위치지정
-            // Instantiate(prefab,position, Quaternion.identity);
-            // Instantiate (prefab,new Vector3(5f, 0f, 8f), Quaternion.identity);
+            //Vector3 position = new Vector3(5f, 0f, 8f);
+            //Instantiate(prefab, position, Quaternion.identity);
+            //Instantiate(prefab, new Vector3(5f, 0f, 8f), Quaternion.identity);
 
+            //row(10)행 x column(10)열 타입맵 찍기
+            //GenerateMap(10, 10);
+            //GenerateMapTile(10, 10);
 
-           /* //10X10의 타일맵 생성, 타일간 간격은 1이다
-            for (int i = 0; i < rows; i++)       // 행 루프
+            //랜덤 타일 찍기
+            //GenerateRandomMapTile();
+
+            //랜덤 타일을 1초 간격으로 10개 찍는다
+            //타일 하나찍고 -> 1초 딜레이 -> 타일 하나 찍고 -> 1초 딜레이
+            //Debug.Log("[0] 코루틴 시작");
+            //StartCoroutine(CreateMapTile());
+            //Debug.Log("[4] 타일 생성 완료");
+        }
+        IEnumerator CreateMapTile()
+        {
+            /*GenerateRandomMapTile();
+            Debug.Log("[1] 첫번째 타일 생성");
+            yield return new WaitForSeconds(1.0f);
+
+            GenerateRandomMapTile();
+            Debug.Log("[2] 두번째 타일 생성");
+            yield return new WaitForSeconds(1.0f);
+
+            GenerateRandomMapTile();
+            Debug.Log("[3] 세번째 타일 생성");
+            yield return new WaitForSeconds(1.0f);*/
+
+            for (int i = 0; i < 10; i++)
             {
-                for (int j = 0; j < cols; j++)   // 열 루프
+                GenerateRandomMapTile();
+                Debug.Log($"{i+1}번째 타일 생성");
+                yield return new WaitForSeconds(1.0f);
+            }
+        }
+
+        private void Update()
+        {
+            if (isCreate == false)
+            {
+                //랜덤 타일을 1초 간격으로 10개 찍는다
+                //타일 하나찍고 -> 1초 딜레이 -> 타일 하나 찍고 -> 1초 딜레이
+                Debug.Log("[0] 코루틴 시작");
+                StartCoroutine(CreateMapTile());
+                                
+                isCreate = true;
+                Debug.Log($"[4] 타일 생성 완료: {isCreate}");
+            }
+
+            Debug.Log($"[99] 업데이트 내용 실행");
+        }
+        #endregion
+
+        #region Custom Method
+        void GenerateMap(int row, int column)
+        {
+            //row행 x column열 타입맵 찍기, 타일간 간격은 1이다
+            for (int i = 0; i < row; i++)
+            {
+                for (int j = 0; j < column; j++)
                 {
-                    // 위치 계산
-                    //Vector3 position = new Vector3(i * spacing, 0, j * spacing);
+                    Vector3 position = new Vector3(i * 5f, 0f, j * -5f);
+                    Instantiate(prefab, position, Quaternion.identity);
+                }
+            }
+        }
 
-                    // 프리팹 생성
-                    //Instantiate(prefab, position, Quaternion.identity,this.transform);
+        //맵 제네레이터를 부모로 지정하며 맵 타일 찍기
+        void GenerateMapTile(int row, int column)
+        {
+            //row행 x column열 타입맵 찍기, 타일간 간격은 1이다
+            for (int i = 0; i < row; i++)
+            {
+                for (int j = 0; j < column; j++)
+                {
+                    //인스턴스시 위치 지정
+                    //Vector3 position = new Vector3(i * 5f, 0f, j * -5f);
+                    //Instantiate(prefab, position, Quaternion.identity, this.transform);
 
-                    // 인스턴스 후 위치 지정 - 생성된 게임오브젝트(transform) 객체 가져오기
+                    //인스턴스 후 위치 지정 - 생성된 게임오브젝트(Transform) 객체 가져오기
                     GameObject go = Instantiate(prefab, this.transform);
-                    go.transform.position = new Vector3(i * 5f, 0, j * -5f);
-                }
-            }*/
-
-        }
-        #endregion
-
-       private void Update()
-        {
-           /* Debug.Log("코루틴 시작");
-            StartCoroutine(CreateMapTile());
-            Debug.Log("타일 생성 완료");*/
-        }
-
-        #region custom Method
-        public void GenerateMap()
-        {
-
-            //10X10의 타일맵 생성, 타일간 간격은 1이다
-            for (int i = 0; i < rows; i++)       // 행 루프
-            {
-                for (int j = 0; j < cols; j++)   // 열 루프
-                {
-                    // 위치 계산
-                    Vector3 position = new Vector3(i * 5f, 0, j * -5f);
-
-                    // 프리팹 생성
-                    Instantiate(prefab, position, Quaternion.identity);
-                }
-            }
-        }
-        #endregion
-
-        //맵 제너레이터를 부모로 지정하며 맵 타일 찍기
-        void GnerateMapTile()
-        {
-            //10X10의 타일맵 생성, 타일간 간격은 1이다
-            for (int i = 0; i < rows; i++)       // 행 루프
-            {
-                for (int j = 0; j < cols; j++)   // 열 루프
-                {
-                    // 인스턴스시 위치 지정
-                    Vector3 position = new Vector3(i * 5f, 0, j * -5f);
-                    Instantiate(prefab, position, Quaternion.identity);
-
-                    // 인스턴스 후 위치 지정
-                    Instantiate(prefab, this.transform);
-
+                    go.transform.position = new Vector3(i * 5f, 0f, j * -5f);
                 }
             }
         }
 
-        // 10열 10행 중 랜덤한 위치에 타일 하나 찍기
+        //row(10)행 x column(10)열 중에 랜덤한 위치에 타일 하나 찍기
         void GenerateRandomMapTile()
         {
             //int row = Random.Range(0, 10);
             //int column = Random.Range(0, 10);
 
-            //0에서 100까지 랜덤 숫자
-            //0행 , (0~100)열
-            int randomnum = Random.Range(0, 100);
-            int row = randomnum / 10;
-            int column = randomnum % 10;
+            // 0 1 2 3....  => r:0, c:0~9
+            //10 11 12 13 .. => r:1, c:0~9
+            //20 21 22 23 ... => r:2, c:0~9
+            int randNumber = Random.Range(0, 100);
+            int row = randNumber / 10;
+            int column = randNumber % 10;
 
-            Vector3 position = new Vector3(row * 5f, 0, column * -5f);
+            Vector3 position = new Vector3(row * 5f, 0f, column * -5f);
             Instantiate(prefab, position, Quaternion.identity, this.transform);
-
         }
 
-        //랜덤 타일을 1초 간격으로 10개 찍는다
-        IEnumerator CreateMapTile()
-        {
-            GenerateRandomMapTile();
-            Debug.Log("첫번째 타일 생성");
-            yield return new WaitForSeconds(1.0f);
-
-            GenerateRandomMapTile();
-            Debug.Log("두번째 타일 생성");
-            yield return new WaitForSeconds(1.0f);
-
-            GenerateRandomMapTile();
-            Debug.Log("세번째 타일 생성");
-            yield return new WaitForSeconds(1.0f);
-
-
-            GenerateRandomMapTile();
-            Debug.Log("네번째 타일 생성");
-            yield return new WaitForSeconds(1.0f);
-
-
-            GenerateRandomMapTile();
-            Debug.Log("다섯번째 타일 생성");
-            yield return new WaitForSeconds(1.0f);
-
-
-            GenerateRandomMapTile();
-            Debug.Log("여섯번째 타일 생성");
-            yield return new WaitForSeconds(1.0f);
-
-
-            GenerateRandomMapTile();
-            Debug.Log("일곱번째 타일 생성");
-            yield return new WaitForSeconds(1.0f);
-
-
-            GenerateRandomMapTile();
-            Debug.Log("여덟번째 타일 생성");
-            yield return new WaitForSeconds(1.0f);
-
-
-            GenerateRandomMapTile();
-            Debug.Log("아홉번째 타일 생성");
-            yield return new WaitForSeconds(1.0f);
-
-            GenerateRandomMapTile();
-            Debug.Log("열번째 타일 생성");
-            yield return new WaitForSeconds(1.0f);
-        }
-
-
-
-
-
+        
+        #endregion
 
     }
 }
+
+
 /*
- 코루틴 함수 : 지연(Delay)함수
-하나 이상의 yield return 무조건 필요
-yield return 문에서 지연 시간을 지정한다
-시간(초)지연 : yield return new WaitForSecond(지연시간(초));
+코루틴 함수 : 지연 함수
+- 하나 이상의 yield return 문이 꼭 있어야 한다
+- yield return 문에서 지연 시간 지정한다
+- 시간(초)지연 : yield return new WaitForSeconds(지연시간(초));
 
 형식
 IEnumerator 함수이름()
 {
     //...
-    yield return .. // 하나 이상의  yield return 무조건 필요
+    yield return .. // 하나이상의 yield return 문이 꼭 있어야 한다
 }
 
 코루틴 함수 호출
-StartCoroutine(코루틴함수이름); 
+StartCoroutine(코루틴함수이름);
 
-
- */
+*/

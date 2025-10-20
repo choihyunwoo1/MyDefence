@@ -4,9 +4,9 @@ namespace Sample
 {
     public class TargetTest : MonoBehaviour
     {
-        #region Varialbes
+        #region Variables
         public int a = 10;
-        private int b =20;
+        private int b = 20;
         #endregion
 
         #region Unity Event Method
@@ -19,7 +19,7 @@ namespace Sample
 
         #region Custom Method
         public int GetB()
-        { 
+        {
             return b;
         }
         #endregion

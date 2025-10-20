@@ -14,6 +14,13 @@ namespace MyDefence
         //초기 소지금
         [SerializeField]
         private int startMoney = 400;
+
+        //게임 Life
+        private static int lives;
+
+        //초기 지급 생명 갯수
+        [SerializeField]
+        private int startLife = 10;
         #endregion
 
         #region Property
@@ -23,18 +30,11 @@ namespace MyDefence
             get { return money; }
         }
 
-        //게임 Life
-        private static int lives;
-
-        //체력 읽기 전용 속성
+        //생명 갯수 읽기 전용 속성
         public static int Lives
         {
             get { return lives; }
         }
-
-        //초기 소지 생명 겟수
-        [SerializeField]
-        private int startLife = 10;
         #endregion
 
         #region Unity Event Method
@@ -42,17 +42,15 @@ namespace MyDefence
         {
             //초기화
             money = startMoney; //초기 소지금 지급
-            Debug.Log($"초기 소지금 {startMoney}골드를 지급하였습니다.");
-
-            lives = startLife; //초기 생명 지급
-            Debug.Log($"초기 생명 {startLife}개를 지급하였습니다.");
+            lives = startLife;  //초기 생명 갯수 지급
+            //Debug.Log($"초기 소지금 {startMoney}골드를 지급하였습니다");
         }
         #endregion
 
         #region Custom Method
         //돈 벌기
         public static void AddMoney(int amount)
-        { 
+        {
             money += amount;
         }
 
@@ -60,35 +58,36 @@ namespace MyDefence
         public static bool UseMoney(int amount)
         {
             //소지금 체크
-            if (money < amount)
+            if(money < amount)
             {
                 Debug.Log("돈이 부족합니다");
                 return false;
             }
+
             money -= amount;
             return true;
         }
 
         //소지금 체크
         public static bool HasMoney(int amount)
-        { 
+        {
             return money >= amount;
         }
 
         //Life 벌기
         public static void AddLives(int amount)
-        { 
+        {
             lives += amount;
         }
 
         //Life 쓰기
-        public static void UseLives(int amount = 1)
+        public static void UseLives(int amount)
         {
             lives -= amount;
 
             if (lives <= 0)
-            {
-                lives = 0; //방어 코드
+            {                
+                lives = 0;
             }
         }
         #endregion

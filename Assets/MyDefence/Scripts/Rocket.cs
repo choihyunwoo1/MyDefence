@@ -1,11 +1,10 @@
-using JetBrains.Annotations;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
 namespace MyDefence
 {
     /// <summary>
-    /// 미사일 발사체를 관리하는 클래스
+    /// 미사일 발사체를 관리하는 클래스, Bullet를 상속 받는다
     /// </summary>
     public class Rocket : Bullet
     {
@@ -14,12 +13,15 @@ namespace MyDefence
         public float damageRange = 3.5f;
         #endregion
 
+        #region Unity Event Method
+        //데미지 범위 표시하기
         private void OnDrawGizmosSelected()
         {
-            //타워중심에 attackRange 범위 확인
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(this.transform.position, damageRange);
+            Gizmos.DrawWireSphere(transform.position, damageRange);
         }
+        #endregion
+
         #region Custom Method
         protected override void HitTarget()
         {
@@ -27,30 +29,31 @@ namespace MyDefence
             GameObject effectGo = Instantiate(impactPrefab, this.transform.position, Quaternion.identity);
             Destroy(effectGo, 3f);
 
-            //damageRange안에 있는 모든 적에게 데미지
+            //Debug.Log("Hit Enemy!!!");
+            //damageRange안에 있는 모든 적에게 데미지 주는 범위
             Explosion();
 
             //탄환 킬
             Destroy(this.gameObject);
         }
 
-        //damageRange안에 있는 모든 적에게 데미지 부여하는 함수
+        //damageRange안에 있는 모든 적(enemy)에게 데미지 주는 범위
         private void Explosion()
         {
             //데미지 범위안에 있는 모든 충돌체 가져오기
             Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, damageRange);
 
-            //모든 충돌체 중에서 enemy 찾기
+            //모든 충돌체 중에서 enemy 찾아서 데미지 주기
             foreach (Collider collider in hitColliders)
             {
-                // Enemy라는 태그를 가진 적 오브젝트만 공격
-                if (collider.tag == "Enemy")
+                //enemy 찾기 - tag 검사
+                if(collider.tag == "Enemy")
                 {
                     Damage(collider.transform);
                 }
             }
-        }
 
+        }
         #endregion
     }
 }
