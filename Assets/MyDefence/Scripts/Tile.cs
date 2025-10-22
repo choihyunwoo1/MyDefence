@@ -15,7 +15,7 @@ namespace MyDefence
         //타일에 설치된 타워 오브젝트 인스턴스
         private GameObject tower;
 
-        //타일에 설치된 타워 오브젝트 blueprint 객체(프리팹, 가격, 설치조정위치...)
+        //타일에 설치된 타워 오브젝트 blueprint 객체(프리팹, 가격, 업그레이드 타워 프리팹, 업그레이드 비용, 설치조정위치) 이후 추가 가능
         private TowerBlueprint blueprint;
 
         //랜더러 컴포넌트 인스턴스 변수 선언
@@ -59,17 +59,17 @@ namespace MyDefence
                 return;
             }
 
+            //만약 타일에 타워오브젝트가 있으면 설치하지 못한다
+            if (tower != null)
+            {
+                buildManager.SelectTile(this);
+                return;
+            }
+
             //만약 타워를 선택하지 않았으면 설치하지 못한다
             if (buildManager.CannotBuild)
             {
                 Debug.Log("설치할 타워가 없습니다");
-                return;
-            }
-
-            //만약 타일에 타워오브젝트가 있으면 설치하지 못한다
-            if (tower != null)
-            {
-                Debug.Log("타워를 설치하지 못합니다");
                 return;
             }
 
@@ -137,6 +137,36 @@ namespace MyDefence
             buildManager.SetTurretToBuild(null);
 
             //Debug.Log($"건설하고 남은 소지금: {PlayerStats.Money}");
+        }
+
+        //업그레이드 타워
+        public void UpgradeTower()
+        {
+            //Debug.Log("설치된 타워를 업그레이드 합니다.");
+
+            //업그레이드 비용 체크
+            if (PlayerStats.HasMoney(blueprint.upgradeCost)==false)
+            {
+                Debug.Log("업그레이드 비용 부족");
+                return;
+            }
+
+            //업그레이드 비용 처리
+            PlayerStats.UseMoney(blueprint.upgradeCost);
+
+            //기존의 타워 처리 
+            Destroy(tower);   
+            tower = null;
+
+            //업그레이드 타워 건설
+            tower = Instantiate(blueprint.upgradePrefab, this.transform.position + blueprint.offsetPos, Quaternion.identity);
+
+            //건설 이펙트 효과 공유 - 생성 후 2초 후 킬 예약
+            GameObject effectGo = Instantiate(buildEffectPrefab, this.transform.position, Quaternion.identity);
+            Destroy(effectGo, 2f);
+
+            //선택된 타일 해제
+            buildManager.DeselectTile();
         }
         #endregion
     }

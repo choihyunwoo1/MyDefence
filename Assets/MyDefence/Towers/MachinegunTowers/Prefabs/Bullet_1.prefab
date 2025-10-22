@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2838492811108535162}
   - component: {fileID: 6532749406641569147}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: Bullet_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1, y: 1.087, z: 0.287}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_LocalScale: {x: 0.18, y: 0.18, z: 0.18}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 079b37e4195daa24693f721a66af30d1, type: 2}
+  - {fileID: 2100000, guid: 78fd5d93c28c4c7419be85c8a03572c8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -122,4 +122,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 70
-  impactPrefab: {fileID: 3508330233755197109, guid: 97180b500fd79814899656d247f7304d, type: 3}
+  impactPrefab: {fileID: 3508330233755197109, guid: 608eefbaddac75b478508a8321883f20, type: 3}
+  attackDamage: 70
