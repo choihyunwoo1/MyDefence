@@ -16,10 +16,10 @@ namespace MyDefence
         private GameObject tower;
 
         //타일에 설치된 타워 오브젝트 blueprint 객체(프리팹, 가격, 업그레이드 타워 프리팹, 업그레이드 비용, 설치조정위치) 이후 추가 가능
-        private TowerBlueprint blueprint;
+        public TowerBlueprint blueprint;
 
         //랜더러 컴포넌트 인스턴스 변수 선언
-        private Renderer renderer;
+        private new Renderer renderer;
 
         //마우스가 들어가면 바뀌는 컬러
         public Color hoverColor;
@@ -34,8 +34,14 @@ namespace MyDefence
         //타일의 원래 메터리얼
         private Material startMaterial;
 
-        //타워 건설 효과
+        //타워 건설 효과 이펙트
         public GameObject buildEffectPrefab;
+
+        //타워 판매 효과 이펙트
+        public GameObject sellEffectPrefab;
+
+        //타워 업그레이드 완료 여부 체크
+        public bool isUpgradeCompleted = false ;
         #endregion
 
         #region Unity Event Method
@@ -154,6 +160,9 @@ namespace MyDefence
             //업그레이드 비용 처리
             PlayerStats.UseMoney(blueprint.upgradeCost);
 
+            //업그레이드 완료 처리
+            isUpgradeCompleted = true;
+
             //기존의 타워 처리 
             Destroy(tower);   
             tower = null;
@@ -163,6 +172,26 @@ namespace MyDefence
 
             //건설 이펙트 효과 공유 - 생성 후 2초 후 킬 예약
             GameObject effectGo = Instantiate(buildEffectPrefab, this.transform.position, Quaternion.identity);
+            Destroy(effectGo, 2f);
+
+            //선택된 타일 해제
+            buildManager.DeselectTile();
+        }
+
+        //설치된 타워를 판매한다.
+        public void SellTower()
+        {
+            //판매 가격 벌기
+            PlayerStats.AddMoney(blueprint.GetSellCost());
+
+            //업그레이드 완료 체크 초기화
+            isUpgradeCompleted = false;
+
+            //기존의 타워 처리 
+            Destroy(tower);
+
+            //건설 이펙트 효과 공유 - 생성 후 2초 후 킬 예약
+            GameObject effectGo = Instantiate(sellEffectPrefab, this.transform.position, Quaternion.identity);
             Destroy(effectGo, 2f);
 
             //선택된 타일 해제

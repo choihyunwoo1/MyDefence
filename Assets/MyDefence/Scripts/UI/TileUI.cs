@@ -1,4 +1,6 @@
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 namespace MyDefence
 {
@@ -13,6 +15,15 @@ namespace MyDefence
 
         //선택된 타일
         private Tile targetTile;
+
+        //UI 연결
+        public TextMeshProUGUI upgradeCostText;
+
+        //업그레이드 버튼 컴포넌트 가져오기
+        public Button upgradeButton;
+
+        //판매 가격 text
+        public TextMeshProUGUI sellCostText;
         #endregion
 
         #region Property
@@ -34,6 +45,21 @@ namespace MyDefence
             targetTile = tile;
             this.transform.position = tile.transform.position;
                 
+            //타일 UI 셋팅
+            if (targetTile.isUpgradeCompleted) //타일의 타워가 업그레이드 되었으면
+            {
+                upgradeCostText.text = "DONE";
+                upgradeButton.interactable = false;
+            }
+            else //그렇지 않다면
+            {
+                upgradeCostText.text = targetTile.blueprint.upgradeCost.ToString() + "G";
+                upgradeButton.interactable = true;
+            }
+
+            //판매 가격을 string형식으로 치환
+            sellCostText.text = targetTile.blueprint.GetSellCost().ToString() + "G";
+
             ui.SetActive(true);
         }
         //타일 UI 숨기기
@@ -46,15 +72,17 @@ namespace MyDefence
         //업그레이드 버튼을 선택했습니다.
         public void Upgrade()
         {
-            Debug.Log("설치된 타워를 업그레이드 합니다.");
+           // Debug.Log("설치된 타워를 업그레이드 합니다.");
             targetTile.UpgradeTower();
         }
 
         //판매 버튼을 선택 하였습니다.
         public void Sell()
         {
-            Debug.Log("설치된 타워를 판매합니다.");
+            // Debug.Log("설치된 타워를 판매합니다.");
+            targetTile. SellTower();
         }
+
         #endregion
 
     }

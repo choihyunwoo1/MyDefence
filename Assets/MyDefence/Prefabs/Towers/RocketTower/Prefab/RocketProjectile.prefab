@@ -79,6 +79,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 40
   impactPrefab: {fileID: 6550166358722969033, guid: a57eb9e413b289f41b8bb91d5407cfcd, type: 3}
+  attackDamage: 50
   damageRange: 3
 --- !u!1 &4608225051471286127
 GameObject:
