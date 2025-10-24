@@ -33,6 +33,7 @@ namespace MyDefence
         public void MainMenu()
         {
             Debug.Log("메뉴로 돌아갑니다");
+            SceneManager.LoadScene("MainMenu");
         }
 
         public void Restart()
@@ -44,7 +45,7 @@ namespace MyDefence
             //타워 제거....
 
             //현재 플레이중인 SCENE(씬)을 재호출한다. = 리플레이
-            SceneManager.LoadScene(0);  //인덱스로 불러오기
+            SceneManager.LoadScene("PlayScene");  //인덱스로 불러오기
             //SceneManager.LoadScene("PlayScene"); - 씬 이름으로 불러오기
 
             //int nowBuildIndex = SceneManager.GetActiveScene().buildIndex;
