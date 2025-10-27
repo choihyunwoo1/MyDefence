@@ -54,6 +54,7 @@ namespace MyDefence
             money = startMoney; //초기 소지금 지급
             lives = startLife;  //초기 생명 갯수 지급
             rounds = 0;         //웨이브 카운트 초기화
+
             //Debug.Log($"초기 소지금 {startMoney}골드를 지급하였습니다");
         }
         #endregion

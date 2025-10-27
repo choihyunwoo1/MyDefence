@@ -1,4 +1,4 @@
-Shader "Unlit/MyShader"
+Shader "Custom/MyShader"
 {
     Properties
     {
@@ -56,42 +56,74 @@ Shader "Unlit/MyShader"
         }
     }
 }
+
+
 /*
-Lighting의 종류
+Lighting 종류
+1) Ambient : 주변광, 환경광등에 나오는 빛이 오브젝트에 반사되어 나온 반사광
+2) Diffuse : 오브젝트 자신의 고유 색, 광원에 반사될때 출력되는 가장 주된 색
+3) Specular : 정 반사광, 특정 방향으로만 반사되는 빛, 하이라이트 표현
+4) Emissive : 메시 표면에서 자체적으로 방출되는 색
 
-1) Ambient : 주변광 , 환경광{ex) SkyBox}에 의한 빛이 오브젝트에 반사되어 나온 반사광 = 공기중에 퍼진 빛 = Environment
-
-2) Diffuse : 오브젝트 자신의 고유 색, 광원에 반사될때 출력되는 가장 주된 색 = Main Color = 물체의 본래 색을 비추는 빛
-
-3) Specular : 정 반사광, 특정 방향으로만 반사되는 빛, 하이라이트 표현 = 질감 표현을 하기위한, 가장 강한 빛
-
-4) Emissive : Mesh 표면에서 자체적으로 방출되는 색 = 자가 광원
 
 Shader 프로그램
 : 화면에 출력할 픽셀의 위치와 색상을 계산하는 함수를 작성하는 것
 
 언어
-shaderLab : 유니티에서 제공하는 셰이더 스크립트 언어
-셰이더 언어
+ShaderLab : 유니티에서 사용하는 셰이더 스크립트 언어
+셰이더 언어 CG / HLSL / GLSL
+CG : C for Graphics, MS와 엔비디아에서 만든 셰이딩 언어
+GLSL : OpenGL에서 사용하는 셰이딩 언어 (OpenGL Shading Language)
+HLSL : 가장 유명하고 보편적으로 사용하는 언어, Unity 6에서 사용, High Level Shading Language
 
-1) CG : C for graphics, MS와 엔비디아 에서 만든 언어(C Language)
-이름 그대로 그래픽용 C언어예요.
-Unity의 옛날 셰이더(예: Surface Shader) 들이 대부분 CG로 작성되어 있어요.
-사실상 HLSL 기반이라 문법이 거의 똑같아요.
+ShaderLab 으로 작성할수 있는 셰이더 프로그램
+: 고정 함수 셰이더 - x
+: 표면 셰이더 - surface shader
+: 버텍스/프래그먼트 셰이더 : 6.0 
 
-2) HLSL :  “Microsoft가 만든 DirectX 전용 셰이더 언어(Shading Language)
-이름 뜻 그대로 고수준 셰이더 언어
-DirectX 전용이라 Windows, Xbox 쪽에서 주로 사용돼요.
-Unity에서는 기본적으로 HLSL을 사용합니다
+Shader "Custom/MyShader"    //셰이더 경로 및 셰이더 이름 정의
+{
+    //인스펙터창에서 입력 받는 값 정의
+    Properties
+    {
+        
+    }
+    //고사양
+    SubShader
+    {
+        Pass
+        {
 
-3) GLSL : OpenGL용 셰이더 언어(Shading Language) 
-Khronos Group(오픈GL을 만든 곳)에서 만든 언어
-Mac, Linux, WebGL 같은 플랫폼에서 주로 쓰여요
-문법은 HLSL과 비슷하지만, 함수 이름과 자료형이 약간 다름
+        }
+        Pass
+        {
 
+        }
+    }
+    //중사양
+    SubShader
+    {
+        Pass
+        {
 
-ShaferLab 으로 작성할 수 있는 프로그램
-1) 고정 함수 셰이더 - 사라짐  
-2) 표면 셰이더 = Surface- 가장 최근까지 사용함
-3) Vertex & Fragment 셰이더 - 가장 많이 사용함
+        }
+        Pass
+        {
+
+        }
+    }
+    //저사양
+    SubShader
+    {
+        Pass
+        {
+
+        }
+        Pass
+        {
+
+        }
+    }
+    Fallback "Diffuse"
+}
 */

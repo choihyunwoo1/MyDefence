@@ -13,13 +13,13 @@ namespace MyDefence
         public int cost;            //타워 건설 비용
 
         public GameObject upgradePrefab; //건설된 타워를 업그레이드 하기 위한 프리팹 오브젝트
-        public int upgradeCost;      //건설된 타워의 업그레이드 비용
+        public int upgradeCost;          //건설된 타워의 업그레이드 비용
 
         public Vector3 offsetPos;   //타워 건설시 위치 조정 값
 
-        //판매 가격 : 빌드 가격의 반값
+        //판매 가격: 빌드 비용의 반값
         public int GetSellCost()
-        { 
+        {
             return cost / 2;
         }
     }

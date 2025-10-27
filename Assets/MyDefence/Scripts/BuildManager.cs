@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace MyDefence
 {
@@ -26,6 +27,7 @@ namespace MyDefence
                 return;
             }
             instance = this;
+
             //DontDestroyOnLoad(this.gameObject);
         }
         #endregion
@@ -38,7 +40,7 @@ namespace MyDefence
         //타일 UI
         public TileUI tileUI;
 
-        //선택된 타일 저장
+        //선택된 타일 저장(타일 UI가 있는 타일)
         private Tile selectTile;
         #endregion
 
@@ -77,25 +79,29 @@ namespace MyDefence
             towerToBuild = tower;
         }
 
-        //타워오브젝트가 선택된 타일을 선택, 선택된 타일 정보를 매개변수로 받아온다.
+        //타워오브젝트가 설치된 타일을 선택, 선택된 타일 정보를 매개변수로 받아온다
         public void SelectTile(Tile tile)
         {
-            //선택된 타일 체크
-            if (tile == selectTile)
-            {
+            //저장된 타일과 선택된 타일 체크
+            if(tile == selectTile)
+            {                
                 DeselectTile();
-                return;            
+                return;
             }
 
+            //설치될 타워 정보 초기화
             towerToBuild = null;
 
             selectTile = tile;
             tileUI.ShowTileUI(selectTile);
         }
 
-        //선택된 타일 해제 및 초기화
+        //선택된 타일 해제, 선택된 타일 초기화
         public void DeselectTile()
         {
+            //설치될 타워 정보 초기화
+            towerToBuild = null;
+
             tileUI.HideTileUI();
             selectTile = null;
         }

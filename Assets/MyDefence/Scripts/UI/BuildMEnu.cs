@@ -31,7 +31,7 @@ namespace MyDefence
         public void SelectMachineGun()
         {
             //타일 선택 정보 초기화
-            buildManager.DeselectTile();    
+            buildManager.DeselectTile();
 
             //Debug.Log("머신건 타워를 선택하였습니다");
             buildManager.SetTurretToBuild(machineGun);

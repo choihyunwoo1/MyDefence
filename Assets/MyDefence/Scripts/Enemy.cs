@@ -1,12 +1,12 @@
 using UnityEngine;
-using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 namespace MyDefence
 {
     /// <summary>
     /// Enemy 를 관리하는 클래스
     /// </summary>
-    public class Enemy : MonoBehaviour
+    public class Enemy : MonoBehaviour, IDamageable
     {
         #region Variables
         //이동 목표 위치를 가지고 있는 오브젝트
@@ -35,6 +35,9 @@ namespace MyDefence
         //죽음 보상
         [SerializeField]
         private int rewardMoney = 50;
+
+        //UI
+        public Image hpBarImage;
         #endregion
 
 
@@ -86,8 +89,11 @@ namespace MyDefence
             health -= damage;
             //Debug.Log($"Enemy Health: {health}");
 
+            //UI
+            hpBarImage.fillAmount = health / startHealth;
+
             //죽음 체크
-            if(health <= 0 && isDeath == false)
+            if (health <= 0 && isDeath == false)
             {
                 health = 0;
                 Die();
@@ -116,7 +122,6 @@ namespace MyDefence
         public void Slow(float rate)    //40%
         {
             speed = startSpeed * (1 - rate);       //4 * (1 - 0.4) = 2.4
-            Debug.Log($"Speed: {speed}");
         }
         #endregion
     }

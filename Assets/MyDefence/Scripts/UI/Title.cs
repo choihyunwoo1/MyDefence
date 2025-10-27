@@ -5,91 +5,85 @@ using System.Collections;
 namespace MyDefence
 {
     /// <summary>
-    /// Title 씬을 관리하는 클래스
+    /// 타이틀 씬을 관리하는 클래스
     /// </summary>
     public class Title : MonoBehaviour
     {
         #region Variables
         [SerializeField]
         private string loadToScene = "MainMenu";
+        [SerializeField]
+        private float titleTimer = 10f;
+        private float countdown = 0f;
+        [SerializeField]
+        private float showTimer = 3f;
+        //쑈타임 체크
+        private bool isShow = false;
 
-        float countDown = 0f;
-        float titleTimer = 10f;
-
-        public GameObject AnkeyUI;
-
-        float showTimer = 3f;
-        bool isShow = true;
-
-        Coroutine titleCoroutine;
+        public GameObject anyKeyUI;
         #endregion
 
         #region Unity Event Method
-
         private void Start()
         {
-            //10초가 지나면 AnyKey를 보여준다 - 지연함수 사용 Invoke
-            //Invoke("ShowAnyKey", 3f);
+            //AnyKey텍스트 3초 지난 후에 나오기 : 3초 지연한 후에  Show
+            //[1] Invoke
+            //Invoke("ShowAnyKey", showTimer);
             //Invoke("GotoMainMenu", titleTimer + showTimer);
 
-            //코루틴 지연함수 겸 오류방지로 초기화
-            titleCoroutine = StartCoroutine(TitleProcess());
-
+            //[2] 코루틴
+            StartCoroutine(TitleProcess());
         }
 
         private void Update()
         {
-            //쇼타일 체크
+            //쇼타임 체크
             if (isShow == false)
                 return;
 
-
-           /* countDown += Time.deltaTime;
-            if (countDown > titleTimer)
+            /*//10초가 지나면 자동으로 메인메뉴로 이동 (키를 누르지 않아도)
+            countdown += Time.deltaTime;
+            if (countdown > titleTimer)
             {
+                //타이머 기능
                 GotoMainMenu();
 
-                countDown = 0f;
+                //타이머 초기화
+                countdown = 0;
                 return;
             }*/
 
-            //아무 키를 누르면 메인메뉴 씬 이동
+            //아무 키를 누르면 메인메뉴 씬 이동로 이동
             if (Input.anyKeyDown)
             {
-                // 코루틴이 실행 중이라면 멈춤
-                if (titleCoroutine != null)
-                {
-                    StopCoroutine(titleCoroutine);
-                    titleCoroutine = null;
-                }
-
                 GotoMainMenu();
+
+                //현재 진행중인 코루팀 함수 모두 강제 중단
+                StopAllCoroutines();
             }
         }
         #endregion
 
         #region Custom Method
-        void GotoMainMenu()
+        private void GotoMainMenu()
         {
             SceneManager.LoadScene(loadToScene);
         }
 
-        void ShowAnyKey()
+        private void ShowAnyKey()
         {
             isShow = true;
-            AnkeyUI.SetActive(true);
+            anyKeyUI.SetActive(true);
         }
 
         IEnumerator TitleProcess()
-        { 
+        {
             yield return new WaitForSeconds(showTimer);
             ShowAnyKey();
 
             yield return new WaitForSeconds(titleTimer);
             GotoMainMenu();
         }
-
-
         #endregion
     }
 }

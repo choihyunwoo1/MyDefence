@@ -131,5 +131,5 @@ MonoBehaviour:
   hoverMaterial: {fileID: 2100000, guid: 558b753725529da43ad9efd1bcabbd02, type: 2}
   moneyMaterial: {fileID: 2100000, guid: b4cbaec1ee9434b4e88910346a54c168, type: 2}
   buildEffectPrefab: {fileID: 7250217547014553838, guid: 35ae11e184be74445abe7491f048ecbe, type: 3}
-  sellEffectPrefab: {fileID: 7250217547014553838, guid: 5a9be2a35784fc7408b4d397f0ff7656, type: 3}
+  sellTowerPrefab: {fileID: 7810895275005868403, guid: e23472c67e523a241a5a6621f125af97, type: 3}
   isUpgradeCompleted: 0
