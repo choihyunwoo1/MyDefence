@@ -77,10 +77,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04f03c91ba7371a4498b0999b0b1ba52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 70
+  moveSpeed: 40
   impactPrefab: {fileID: 6550166358722969033, guid: a57eb9e413b289f41b8bb91d5407cfcd, type: 3}
-  attackDamage: 50
-  damageRange: 3.5
+  damageRange: 3
 --- !u!1 &4608225051471286127
 GameObject:
   m_ObjectHideFlags: 0
