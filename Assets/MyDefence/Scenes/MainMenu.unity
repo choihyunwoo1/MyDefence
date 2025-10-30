@@ -566,16 +566,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: {x: 0, y: 0.3, z: 0}
---- !u!4 &484149159 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6681276256335075704, guid: fe8c62ffe581a7948a5f0bb4524194f8, type: 3}
-  m_PrefabInstance: {fileID: 1695590277}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &484149161 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 8864241931600934368, guid: fe8c62ffe581a7948a5f0bb4524194f8, type: 3}
-  m_PrefabInstance: {fileID: 1695590277}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &550810588
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,8 +917,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: QUIT
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4debdeef590cfa345bd1c035fe7bd6ce, type: 2}
-  m_sharedMaterial: {fileID: -4548195720707452306, guid: 4debdeef590cfa345bd1c035fe7bd6ce, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1113,63 +1103,6 @@ Transform:
   - {fileID: 4747494602629430}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1695590277
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1805109074}
-    m_Modifications:
-    - target: {fileID: 6681276256335075704, guid: fe8c62ffe581a7948a5f0bb4524194f8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6681276256335075704, guid: fe8c62ffe581a7948a5f0bb4524194f8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6681276256335075704, guid: fe8c62ffe581a7948a5f0bb4524194f8, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6681276256335075704, guid: fe8c62ffe581a7948a5f0bb4524194f8, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6681276256335075704, guid: fe8c62ffe581a7948a5f0bb4524194f8, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6681276256335075704, guid: fe8c62ffe581a7948a5f0bb4524194f8, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6681276256335075704, guid: fe8c62ffe581a7948a5f0bb4524194f8, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6681276256335075704, guid: fe8c62ffe581a7948a5f0bb4524194f8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6681276256335075704, guid: fe8c62ffe581a7948a5f0bb4524194f8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6681276256335075704, guid: fe8c62ffe581a7948a5f0bb4524194f8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8044746286348192280, guid: fe8c62ffe581a7948a5f0bb4524194f8, type: 3}
-      propertyPath: m_Name
-      value: LaserFireEffect
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: fe8c62ffe581a7948a5f0bb4524194f8, type: 3}
 --- !u!1 &1732946964
 GameObject:
   m_ObjectHideFlags: 0
@@ -1372,8 +1305,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 1.19, z: 1.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 484149159}
+  m_Children: []
   m_Father: {fileID: 440872080}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1805109075
@@ -1388,7 +1320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a048ae93ef2db5e43a0f6ec5ab508774, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleToPlay: {fileID: 484149161}
+  particleToPlay: {fileID: 0}
   playTimer: 6.5
 --- !u!1 &1862408085
 GameObject:
@@ -1695,8 +1627,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: PLAY
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4debdeef590cfa345bd1c035fe7bd6ce, type: 2}
-  m_sharedMaterial: {fileID: -4548195720707452306, guid: 4debdeef590cfa345bd1c035fe7bd6ce, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
