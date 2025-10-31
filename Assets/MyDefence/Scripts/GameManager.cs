@@ -24,6 +24,7 @@ namespace MyDefence
         [SerializeField]
         private bool isCheating = false;
 
+        public static GameManager Instance;
         //현재 플레이씬의 레벨
         [SerializeField]
         private int nowLevel = 1;
@@ -40,9 +41,16 @@ namespace MyDefence
             get { return isGameOver; }
             private set { isGameOver = value; }
         }
+
+        public int NowLevel => nowLevel; // 읽기 전용 프로퍼티
         #endregion
 
         #region Unity Event Method
+
+        private void Awake()
+        {
+            Instance = this;
+        }
 
         private void Start()
         {

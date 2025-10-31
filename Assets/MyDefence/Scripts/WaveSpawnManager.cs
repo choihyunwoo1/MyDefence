@@ -13,11 +13,12 @@ namespace MyDefence
         //현재 살아있는 적의 수
         public static int enemyAlive = 0;
 
-        //웨이브 데이터 셋팅: 프리팹, 생성갯수, 생성 딜레이
+        //웨이브 데이터 셋팅:생성갯수, 생성 딜레이
         public Wave[] waves;        // waves[0] ~ waves[4]
 
-        //적 프리팹 오브젝트 - 원본
-        public GameObject enemyPrefab;
+        //스폰 후 이동할 첫번째 노드
+        [SerializeField]
+        private Node next;
 
         //public Transform start;  == this.transform
 
@@ -36,6 +37,7 @@ namespace MyDefence
         public GameObject waveCountUI;
 
         public TextMeshProUGUI waveCountText;
+
         #endregion
 
         #region Unity Event Method
@@ -110,7 +112,24 @@ namespace MyDefence
         //시작점 위치에 enemy 1개 생성
         void EnemySpawn(GameObject prefab)
         {
-            Instantiate(prefab, this.transform.position, Quaternion.identity);
+            GameObject enemyGo = Instantiate(prefab,this.transform.position,Quaternion.identity);
+
+            // prefab 자체에서 NewMonoBehaviourScript 컴포넌트 확인
+            NewMonoBehaviourScript comp = prefab.GetComponent<NewMonoBehaviourScript>();
+
+            if (comp != null)
+            {
+                Vector3 pos = enemyGo.transform.position;
+                pos.y = comp.position.y;  // prefab에 설정된 y 값 적용
+                enemyGo.transform.position = pos;
+            }
+
+            Enemy_N enemy_N = enemyGo.GetComponent<Enemy_N>();
+            if (enemy_N != null)
+            {
+                //다음 노드 적용
+                enemy_N.SetNextNode(next);
+            }
         }
 
         //WaveStart 버튼 클릭시 호출

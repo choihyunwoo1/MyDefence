@@ -46,6 +46,11 @@ namespace Sample
             //kill
             Destroy(gameObject);
         }
+
+        /*public void slow(float rate)
+        {
+            
+        }*/
         #endregion
     }
 }
