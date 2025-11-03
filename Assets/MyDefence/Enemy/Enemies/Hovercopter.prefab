@@ -19643,6 +19643,7 @@ MonoBehaviour:
   nextNode: {fileID: 0}
   speed: 4
   startSpeed: 4
+  rotationSpeed: 5
   startHealth: 100
   deathEffectPrefab: {fileID: 7672034015978270049, guid: 32eefe8425b35fb4ebf23b7de91fb857, type: 3}
   rewardMoney: 50
