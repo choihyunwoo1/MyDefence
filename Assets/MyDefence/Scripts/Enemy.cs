@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace MyDefence
 {
     /// <summary>
-    /// Enemy 를 관리하는 클래스
+    /// Enemy의 체력을 관리하는 클래스
     /// </summary>
     public class Enemy : MonoBehaviour, IDamageable
     {
